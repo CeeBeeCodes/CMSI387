@@ -1,0 +1,11 @@
+For the exercise, write a program called goFish.cthat sums and averages a list of numbers, then creates a string and produces a count. You must use EITHER an array, or a set of pointers as the data storage. The program's specifications are as follows:
+
+The numbers must be prompted for in a loop
+The special value -9999 is used to indicate that the entries are complete
+Store the values in a structure of some kind that is initially declared to be size 25 int elements
+Loop through the structure and sum the elements, then output the sum to the console
+Count the number of elements in the structure, and output their average to the console
+Loop through the structure again, and contatenate all the values into a long string
+Output the string to the console
+Loop through the string, and count all the 7 [seven] characters; this is like in the game Go Fish when you ask another player, GIMME ALL YOUR SEVENS.
+Output the count to the console
