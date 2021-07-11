@@ -1,0 +1,35 @@
+To help familiarize yourself with the operations of the scheduler, this week's in-class exercise will have you simlulate a simple RR scheduler with several processes. The input to the program will be from the command line arguments, and the output will be similar to a Gantt chart.
+
+The specifications are as follows:
+
+Create the program schedPractice.c that contains a main() method
+Input to the program will be from command line arguments which are presented in this order:
+Single letter name of the thread to be run
+Integer duration that the thread requires to run to completion [in seconds]
+Next letter, next duration, next letter, next duration
+[…and so on for at least three threads…]
+Last letter, last duration
+Assume a time slice [quantum] of 40 milliseconds [mS]
+The output of your program should show the thread letter, a colon, the amount of time for that quantum it used, another colon, and the amount of time the thread still needs until completion
+Example for four threads, A, B, C, and D, with durations 100, 200, 130, and 74 mS respectively:
+   %> schedPractice A 100 B 200 C 130 D 74
+
+   KEY -- thread:used:remaining
+
+   A:40:60
+   B:40:160
+   C:40:90
+   D:40:34
+   A:40:20
+   B:40:120
+   C:40:50
+   D:34:done
+   A:20:done
+   B:40:80
+   C:10:done
+   B:40:40
+   B:40:done
+   
+   You will need to parse the command line arguments to get the number of pairs. Each pair will be a single character paired with an integer
+You can use whatever data structure you like to store the values, single arrays, two-dimensional array, struct, or whatever you like
+                    
