@@ -1,0 +1,20 @@
+# Detailed Design Document
+Ameya Mellacheruvu, Clarissa Bernardo, and Krysten Tachiyama
+
+## 2.1 – Detailed list of Linux modules that will be modified/affected
+While no commands are being directly modified, the commands `cd`, `mkdir`, and `echo` are being combined into a single command.
+
+## 2.2 – Detailed list of any new modules that you will produce [or 'Not Applicable' if there are none]
+Not Applicable.
+
+## 2.3 – Class diagram showing affected modules [and any new modules] and how they related to one another
+![Class Diagram](diagram.png "diagram")
+
+
+## 2.4 - List or table of explanations of all command line options that will be implemented
+| Command Line Options    | Description |
+| --------------------- | ----------- |
+| `cd [directoryName]`| Switches the current working directory to `[directoryName]` if it exists |
+| `mkdir [directoryName]`| Creates the new directory `[directoryName]` |
+| `echo ["message"]`| Displays a message to the terminal window |
+| `cd [directoryName] -m`| `cd` into a new directory if it exists. If the directory doesn't exist, `[directoryName]`<br />is created and `cd` into. A message will also be displayed to the terminal to let<br /> them know a new directory was created |
