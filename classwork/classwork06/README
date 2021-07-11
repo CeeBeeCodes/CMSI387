@@ -1,0 +1,12 @@
+For this in-class assignment, you will investigate some virtual memory accessing. Write a program that loops many times, each time using an inner loop to access every 4096th element of a large array of bytes. Time how long your program takes per array access. Do this with varying array sizes. Are there any array sizes when the average time suddenly changes? Write a report in which you explain what you did, and the hardware and software system context in which you did it, carefully enough that someone could replicate your results.
+
+The specifications are as follows:
+
+Write a program vmArrayTimer.c which takes an array size as a command line argument
+The program should create an array that is the size of that command line argument. You will need to use the malloc() function call for this operation. Don't forget to free the memory at the end of your program with a free() function call.
+Next, fill the array with integers which are random values between one and one hundred, inclusive
+Make sure your program includes an output statement to inform the user that the array has been filled, then another output statement to let the user know that an access has happened, including the value retrieved from the array
+Compile and run your program to make sure it works properly; you can start small; instead of the 4096th element, declare the array on the command line to be 100 elements, and then access element number 57 [for example] to prove correct operation
+Modify your program [if necessary] to handle a very large array and every 4096th element as the problem statement above requires
+Time the operation of your program; you can look up the command for accessing system time for your O/S on the Internet and use it to determine program duration. The time method does NOT have to be built into your program unless you want to do so.
+Manually track the elapsed time duration to determine the average time; does it change in any significant way with a VERY large array of numbers?
