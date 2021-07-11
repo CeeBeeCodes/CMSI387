@@ -1,0 +1,33 @@
+# Preliminary Design Document
+
+Ameya Mellacheruvu, Clarissa Bernardo, and Krysten Tachiyama
+
+## 1.1 – Description of modification/addition to Linux:
+
+We want to augment Linux’s `cd` and `mkdir` functions. The modification will determine, if the directory does not exist, the user can create a new one using the command `cd [directoryName] -m`.
+
+## 1.2 – Rationale as to why this is a good idea, or what the good points of it are:
+
+There are a few errors a user can run into when it comes to certain directory commands. If they try to make a new directory that already exists, <em>"A subdirectory or file temp already exists"</em> error will be given. On the other hand, if a user tries to `cd` into a directory that doesn't exist, <em>"The system cannot find the path specified"</em> error will be given. A single command can take care of both of these issues by allowing the user to `cd` into the directory as long as it exists, and `mkdir` the directory if it does not.
+
+This is possible via a combined command that looks like:
+
+```
+cd newdir || (mkdir newdir && echo "new directory was created)"
+```
+
+To increase efficiency, we want to implement a single command that looks like the following:
+
+```
+cd [directoryName] -m
+```
+
+Additionally, the command will let you know which command, `cd` or `mkdir`, was implemented.
+
+## 1.3 – Preliminary list of [possible] Linux modules that will be modified/affected:
+
+While no commands are being directly modified, the commands `cd`, `mkdir`, and `echo` are being combined into a single command.
+
+## 1.4 – Preliminary list of any new modules that you will produce [or 'Not Applicable' if there are none]:
+
+Not applicable.
