@@ -1,0 +1,85 @@
+This exercise is to modify the code for the producer/consumer [a.k.a. bounded buffer] pattern given below so that it is automatic. That is, instead of asking the user for input each time, the program will be modified to start two threads, a producer and a consumer, and will synchronize them appropriately with output messages stating the condition of the queue and the producer or consumer thread.
+
+The specifications are as follows:
+
+Save the code below into a file called bounded.c
+Compile the code as-is, and make sure it works properly by adding several messages to the buffer, then consuming the messages
+Be sure to test that you can fill the buffer and get the buffer full message
+Be sure to ALSO test that you can empty the buffer and get the buffer empty message
+The exercise is to replace the menu coding mechanism with code for running two threads that will automatically run as the producer and the consumer so that you can see them work together while sharing the buffer area. You will need to add some sort of locking mechanism – a mutex, some wait and signal code, a monitor, or some other mechanism of your choice to synchronize the two threads.
+
+SO, NEXT STEP:
+Find example code in your text book [or on the Internet] that will run multiple threads; copy this code and integrate it with your existing code to make the two threads run the producer and consumer functions. NOTE: you WILL most likely need to #include pthread.h [Mac] or windows.h [PC] for this to work.
+Make the two threads wait for some time between each iteration, nominally 500 milliseconds
+Run your resulting program for at least 10 seconds
+Adjust the times to see if you can get the producer to fill up the buffer before the consumer can empty it; then re-adjust to see if you can get the consumer to empty the buffer before the producer can fill it
+How many times did the buffer fill up so the producer had to wait?
+How many times was the buffer empty so the consumer had to wait?
+Here is the starting code:
+
+
+   #include <stdio.h>
+   #include <stdlib.h>
+
+   int mutex = 1;
+   int full  = 0;
+   int empty = 7;          // maximum of seven messages in buffer
+   int x     = 0;
+
+   int myWait( int s ) {
+      return( --s );
+   }
+
+   int mySignal( int s ) {
+      return( ++s );
+   }
+
+   int main()
+   {
+      int n;
+      void producer();
+      void consumer();
+
+      while( 1 ) {
+         printf( "\n\n   1.Producer\n   2.Consumer\n   3.Exit" );
+         printf("\n      Enter your choice: ");
+         scanf("%d",&n);
+         switch( n ) {
+            case 1:  if( (mutex == 1) && (empty != 0) ) {
+                        producer();
+                     } else {
+                        printf( "\nBuffer is full!!" );
+                     }
+                     break;
+            case 2:  if( (mutex == 1) && (full != 0) ) {
+                        consumer();
+                     } else {
+                        printf("\nBuffer is empty!!");
+                     }
+                     break;
+            case 3:
+            default: exit( 0 );
+                     break;
+         }
+      }
+      return 0;
+   }
+
+   void producer() {
+      mutex = myWait( mutex );
+      full  = mySignal( full );
+      empty = myWait( empty );
+      x++;
+      printf( "\n  Producer produces the item %d", x );
+      mutex = mySignal( mutex );
+   }
+
+   void consumer()
+   {
+      mutex = myWait( mutex );
+      full  = myWait( full );
+      empty = mySignal( empty );
+      printf( "\n  Consumer consumes item %d", x );
+      x--;
+      mutex = mySignal( mutex );
+   }
